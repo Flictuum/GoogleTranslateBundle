@@ -35,7 +35,7 @@ class EkoGoogleTranslateExtension extends Extension
         $loader = new Loader\XmlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('methods.xml');
 
-        $container->setParameter('eko_google_translate.api_key', $config['api_key']);
+        $container->setParameter('google_translate.api_key', $config['api_key']);
 
         $this->loadProfilerCollector($container, $loader);
     }
