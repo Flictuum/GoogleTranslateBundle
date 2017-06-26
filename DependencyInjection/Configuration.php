@@ -26,11 +26,11 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('api_google_translate');
+        $rootNode = $treeBuilder->root('eko_google_translate');
 
         $rootNode
             ->children()
-                ->scalarNode('api_key')->isRequired()->end()
+                ->scalarNode('api_key')->end()
             ->end();
 
         return $treeBuilder;
