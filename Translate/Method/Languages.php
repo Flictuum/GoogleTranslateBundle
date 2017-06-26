@@ -63,7 +63,7 @@ class Languages extends Method implements MethodInterface
 
         $result = !empty($json->data->translations) ? $json->data->translations : [];
 
-        $this->stopProfiling($event, $this->getName(), $result);
+        $this->stopProfiling($event);
 
         return $result;
     }

@@ -192,7 +192,7 @@ class Translator extends Method implements MethodInterface
             $result = $current->translatedText;
         }
 
-        $this->stopProfiling($event, $this->getName(), $result);
+        $this->stopProfiling($event);
 
         return $result;
     }

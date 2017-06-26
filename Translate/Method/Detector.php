@@ -78,7 +78,7 @@ class Detector extends Method implements MethodInterface
             }
         }
 
-        $this->stopProfiling($event, $this->getName(), $result);
+        $this->stopProfiling($event);
 
         return $result;
     }
