@@ -180,17 +180,16 @@ class Translator extends Method implements MethodInterface
 
         $event = $this->startProfiling(
             $this->getName(),
-            $client->getDefaultOption('query'),
-            $client->getDefaultOption('source'),
-            $client->getDefaultOption('target')
+            $client->getConfig('query'),
+            $client->getConfig('source'),
+            $client->getConfig('target')
         );
 
-        $json = $client->get($this->url, ['query' => $options])->json();
+        $json = \GuzzleHttp\json_decode($client->get($this->url, ['query' => $options])->getBody()->getContents());
 
-        if (isset($json['data']['translations'])) {
-            $current = current($json['data']['translations']);
-
-            $result = $current['translatedText'];
+        if (!empty($json->data->translations)) {
+            $current = current($json->data->translations);
+            $result = $current->translatedText;
         }
 
         $this->stopProfiling($event, $this->getName(), $result);

@@ -65,13 +65,13 @@ class Detector extends Method implements MethodInterface
 
         $client = $this->getClient();
 
-        $event = $this->startProfiling($this->getName(), $client->getDefaultOption('query'));
+        $event = $this->startProfiling($this->getName(), $client->getConfig('query'));
 
-        $json = $client->get($this->url, ['query' => $options])->json();
+        $json = \GuzzleHttp\json_decode($client->get($this->url, ['query' => $options])->getBody()->getContents());
 
-        if (isset($json['data']['detections'])) {
-            $current = current(current($json['data']['detections']));
-            $result = $current['language'];
+        if (!empty($json->data->translations)) {
+            $current = current($json->data->translations);
+            $result = $current->translatedText;
 
             if (self::UNDEFINED_LANGUAGE == $result) {
                 throw new UnableToDetectException('Unable to detect language');

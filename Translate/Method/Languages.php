@@ -59,9 +59,9 @@ class Languages extends Method implements MethodInterface
     {
         $event = $this->startProfiling($this->getName(), 'get');
 
-        $json = $this->getClient()->get($this->url, ['query' => $options])->json();
+        $json = \GuzzleHttp\json_decode( $this->getClient()->get($this->url, ['query' => $options])->getBody()->getContents());
 
-        $result = isset($json['data']['languages']) ? $json['data']['languages'] : [];
+        $result = !empty($json->data->translations) ? $json->data->translations : [];
 
         $this->stopProfiling($event, $this->getName(), $result);
 
