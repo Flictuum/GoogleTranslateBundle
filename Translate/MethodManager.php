@@ -39,6 +39,22 @@ class MethodManager
     }
 
     /**
+     * Returns all methods by name.
+     *
+     * @param $key
+     *
+     * @return MethodInterface
+     */
+    public function get($key)
+    {
+        if (isset($this->methods[$key])) {
+            return $this->methods[$key];
+        }
+
+        return;
+    }
+
+    /**
      * Returns all methods available.
      *
      * @return array
